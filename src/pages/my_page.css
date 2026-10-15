@@ -1,0 +1,74 @@
+/* 전체 레이아웃 */
+.mypage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 상단 아이디 입력 영역 */
+.mypage-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 94px;
+  padding: 0 16px;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+.mypage-header label {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.mypage-header input {
+  flex: 1;
+  max-width: 540px;
+  height: 40px;
+  padding: 0 14px;
+  border: none;
+  background: #d9d9d9;
+  font-size: 15px;
+  outline: none;
+}
+
+/* 스크롤 되는 회색 영역 */
+.mypage-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 16px;
+  background: #d9d9d9;
+}
+
+/* 파란 박스 그리드 (메인 페이지 제품 그리드와 동일) */
+.mypage-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 41px 20px;
+  padding: 0 8px;
+}
+
+.mypage-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 101 / 120;
+  background: #0000ff;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* 작은 화면 대응 */
+@media (max-width: 900px) {
+  .mypage-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .mypage-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
