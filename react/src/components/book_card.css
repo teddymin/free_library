@@ -1,0 +1,48 @@
+.book-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.book-card-cover {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--green-100);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-card-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-card:hover .book-card-cover,
+.book-card:focus-visible .book-card-cover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.book-card-title {
+  margin-top: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.book-card:hover .book-card-title {
+  color: var(--green-700);
+}
+
+.book-card-author {
+  margin-top: 4px;
+  color: var(--ink-muted);
+  font-size: 13px;
+}
