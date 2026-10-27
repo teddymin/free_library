@@ -4,12 +4,14 @@ import "../pages/login_page.css";
 import { useEffect } from "react";
 
 
-function LoginComponent() {
+function LoginComponent({onLoggedIn}: {onLoggedIn: () => void}) {
   const navigate = useNavigate();
+  
   useEffect(() => {
     fetch("http://localhost:4000/api/auth/me", { credentials: "include" })
       .then((r) => {
-        if (r.ok) navigate("/", { replace: true });
+        if (r.ok) {return;};
+        onLoggedIn();
       })
       .catch(() => {});
   }, [navigate]);

@@ -1,24 +1,11 @@
-import { useSearchParams, useNavigate} from "react-router-dom";
+import { useSearchParams} from "react-router-dom";
 import SiteHeader from "../components/site_header";
 import BookCard from "../components/book_card";
 import {BOOKS} from "../data/books";
 import {CATEGORIES} from "../data/category";
-import {useEffect} from "react";
 import "./main_page.css";
 import LoginComponent from "../components/google_login"
-
-
-function Logedin(){
-  const navigate = useNavigate();
-  useEffect(() => {
-    fetch("http://localhost:4000/api/auth/me", { credentials: "include" })
-      .then((r) => {
-        if (r.ok) return true;
-      })
-      .catch(() => {});
-  }, [navigate]);
-  return false;
-}
+import {useAuth} from "../components/use_auth"
 
 
 function MainPage() {
@@ -26,9 +13,12 @@ function MainPage() {
   const category = params.get("category") ?? "";
   const q = (params.get("q") ?? "").trim();
   const keyword = q.toLowerCase();
+  const {loggedIn, setLoggedIn} = useAuth();
   const filtered = BOOKS.filter((book) => { //my 분류하는 곳
     if(category === "MY") {
-      //
+      if(book.title == "운수 좋은 날")
+        return true
+      return false ;
     }
     const matchCategory = !category || book.categories.includes(category);
     const matchKeyword =
@@ -71,7 +61,9 @@ function MainPage() {
       </nav>
       
       <main className="container">
-        {!Logedin() && category == "MY"? <LoginComponent></LoginComponent> :(
+        { loggedIn === false && category === "MY"
+        ? <LoginComponent onLoggedIn ={() => setLoggedIn(true)} />
+        :(
           <>
         <p className="result-summary">
           {q && <strong>‘{q}’ 검색 결과 · </strong>}

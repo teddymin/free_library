@@ -1,21 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "./site_header.css";
+import {useAuth} from "./use_auth"
 
 interface SearchBoxProps {
   initial: string;
-}
-function Logedin(){
-  const navigate = useNavigate();
-  useEffect(() => {
-    fetch("http://localhost:4000/api/auth/me", { credentials: "include" })
-      .then((r) => {
-        if (r.ok) return true;
-      })
-      .catch(() => {});
-  }, [navigate]);
-  return false;
 }
 
 function SearchBox({ initial }: SearchBoxProps) {
@@ -50,7 +40,7 @@ function SearchBox({ initial }: SearchBoxProps) {
 function SiteHeader() {
   const [params] = useSearchParams();
   const q = params.get("q") ?? "";
-
+  const {loggedIn, setLoggedIn} = useAuth();
   return (
     <header className="site-header">
       <div className="container site-header-inner">
@@ -68,11 +58,11 @@ function SiteHeader() {
         {/* q가 바뀌면 입력창도 새로 초기화되도록 key 사용 */}
         <SearchBox key={q} initial={q} />
 
-        {Logedin() ? null:(
+        {loggedIn === false ?(
           <Link to="/login" className="header-link">
             로그인
           </Link>
-        )}
+        ) : null}
       </div>
     </header>
   );
