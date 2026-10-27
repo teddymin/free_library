@@ -22,14 +22,13 @@ function Logedin(){
 
 
 function MainPage() {
-
   const [params, setParams] = useSearchParams();
   const category = params.get("category") ?? "";
   const q = (params.get("q") ?? "").trim();
   const keyword = q.toLowerCase();
   const filtered = BOOKS.filter((book) => { //my 분류하는 곳
     if(category === "MY") {
-      return true;
+      //
     }
     const matchCategory = !category || book.categories.includes(category);
     const matchKeyword =

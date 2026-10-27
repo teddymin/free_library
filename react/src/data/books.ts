@@ -10,7 +10,7 @@ export const BOOKS: Book[] = [
     categories: ["소설", "단편", "근대문학"],
     description:
       "인력거꾼 김 첨지에게 유난히 손님이 많았던 비 오는 하루를 그린 단편소설입니다.\n\n오랜만에 큰돈을 벌어 들뜬 하루가 아픈 아내에 대한 불안과 겹치며, 제목의 '운수 좋은'이라는 말이 어떤 아이러니를 품고 있는지 보여 줍니다.",
-    cover: "/covers/cover-01.jpg",
+    cover: `/covers/cover-${(1).toString().padStart(2,'0')}.jpg`,
   },
   {
     id: 2,
