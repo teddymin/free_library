@@ -1,15 +1,31 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate} from "react-router-dom";
 import SiteHeader from "../components/site_header";
 import BookCard from "../components/book_card";
 import {BOOKS} from "../data/books";
 import {CATEGORIES} from "../data/category";
+import {useEffect} from "react";
 import "./main_page.css";
+import LoginComponent from "../components/google_login"
+
+
+function Logedin(){
+  const navigate = useNavigate();
+  useEffect(() => {
+    fetch("http://localhost:4000/api/auth/me", { credentials: "include" })
+      .then((r) => {
+        if (r.ok) return true;
+      })
+      .catch(() => {});
+  }, [navigate]);
+  return false;
+}
+
 
 function MainPage() {
+
   const [params, setParams] = useSearchParams();
   const category = params.get("category") ?? "";
   const q = (params.get("q") ?? "").trim();
-
   const keyword = q.toLowerCase();
   const filtered = BOOKS.filter((book) => { //my 분류하는 곳
     if(category === "MY") {
@@ -54,8 +70,10 @@ function MainPage() {
           ))}
         </div>
       </nav>
-
+      
       <main className="container">
+        {!Logedin() && category == "MY"? <LoginComponent></LoginComponent> :(
+          <>
         <p className="result-summary">
           {q && <strong>‘{q}’ 검색 결과 · </strong>}
           총 {filtered.length}권
@@ -70,6 +88,8 @@ function MainPage() {
         ) : (
           <p className="empty">조건에 맞는 책이 없어요. 다른 검색어나 분류를 선택해 보세요.</p>
         )}
+        </>) 
+        }
       </main>
     </div>
   );
