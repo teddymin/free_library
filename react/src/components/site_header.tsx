@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "./site_header.css";
 import {useAuth} from "./use_auth"
-
+import LogoutButton from "./logout"
 interface SearchBoxProps {
   initial: string;
 }
@@ -62,7 +62,7 @@ function SiteHeader() {
           <Link to="/login" className="header-link">
             로그인
           </Link>
-        ) : null}
+        ) : <LogoutButton></LogoutButton> }
       </div>
     </header>
   );

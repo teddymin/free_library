@@ -16,7 +16,7 @@ function MainPage() {
   const {loggedIn, setLoggedIn} = useAuth();
   const filtered = BOOKS.filter((book) => { //my 분류하는 곳
     if(category === "MY") {
-      if(book.title == "운수 좋은 날")
+      if(book.id === 1)
         return true
       return false ;
     }

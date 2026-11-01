@@ -1,20 +1,8 @@
 import { GoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
 import "../pages/login_page.css";
-import { useEffect } from "react";
 
 
 function LoginComponent({onLoggedIn}: {onLoggedIn: () => void}) {
-  const navigate = useNavigate();
-  
-  useEffect(() => {
-    fetch("http://localhost:4000/api/auth/me", { credentials: "include" })
-      .then((r) => {
-        if (r.ok) {return;};
-        onLoggedIn();
-      })
-      .catch(() => {});
-  }, [navigate]);
 
   return (
     <main>
@@ -32,8 +20,8 @@ function LoginComponent({onLoggedIn}: {onLoggedIn: () => void}) {
                 console.error("서버 응답 실패:", r.status, await r.text());
                 return;
             }
-            navigate("/");
-            } catch (e) {
+            onLoggedIn();
+          } catch (e) {
             console.error("요청 자체가 실패 (CORS 가능성):", e);
             }
         }}
