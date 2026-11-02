@@ -40,7 +40,7 @@ function SearchBox({ initial }: SearchBoxProps) {
 function SiteHeader() {
   const [params] = useSearchParams();
   const q = params.get("q") ?? "";
-  const {loggedIn, setLoggedIn} = useAuth();
+  const {loggedIn} = useAuth();
   return (
     <header className="site-header">
       <div className="container site-header-inner">
@@ -58,7 +58,7 @@ function SiteHeader() {
         {/* q가 바뀌면 입력창도 새로 초기화되도록 key 사용 */}
         <SearchBox key={q} initial={q} />
 
-        {loggedIn === false ?(
+        {loggedIn === null? null: loggedIn === false ?(
           <Link to="/login" className="header-link">
             로그인
           </Link>

@@ -5,7 +5,6 @@ import "../pages/login_page.css";
 function LoginComponent({onLoggedIn}: {onLoggedIn: () => void}) {
 
   return (
-    <main>
     <div className="login-container">
     <GoogleLogin
         onSuccess={async (res) => {
@@ -28,7 +27,6 @@ function LoginComponent({onLoggedIn}: {onLoggedIn: () => void}) {
       onError={() => console.error("구글 로그인 실패")}
     />
     </div>
-    </main>
   );
 }
 export default LoginComponent;

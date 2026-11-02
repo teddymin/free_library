@@ -4,6 +4,8 @@ import "./logout.css"
 import { useAuth } from "./use_auth";
 function LogoutButton() {
   const navigate = useNavigate();
+  const { setLoggedIn } = useAuth();
+
 
   const handleLogout = async () => {
     try {
@@ -14,7 +16,6 @@ function LogoutButton() {
     } catch (e) {
       console.error("로그아웃 요청 실패:", e);
     }
-    const { setLoggedIn } = useAuth();
     setLoggedIn(false); // 로그아웃 상태로 변경
     googleLogout();        // 구글 자동 로그인 상태 해제 
     navigate("/");
