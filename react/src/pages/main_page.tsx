@@ -6,7 +6,7 @@ import {CATEGORIES} from "../data/category";
 import "./main_page.css";
 import LoginComponent from "../components/google_login"
 import {useAuth} from "../components/use_auth"
-
+import useActivity from "../data/activity";
 
 function MainPage() {
   const [params, setParams] = useSearchParams();
@@ -14,11 +14,11 @@ function MainPage() {
   const q = (params.get("q") ?? "").trim();
   const keyword = q.toLowerCase();
   const {loggedIn, setLoggedIn} = useAuth();
+  const activities = useActivity(loggedIn === true); // 로그인 상태에 따라 활동 내역을 가져옴
+  const myBookIds = new Set(activities.map((a) => a.book_id)); // 활동 내역에서 책 ID만 추출하여 Set으로 만듦
   const filtered = BOOKS.filter((book) => { //my 분류하는 곳
     if(category === "MY") {
-      if(book.id === 1)
-        return true
-      return false ;
+      return myBookIds.has(book.id);
     }
     const matchCategory = !category || book.categories.includes(category);
     const matchKeyword =
