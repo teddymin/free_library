@@ -9,7 +9,7 @@ noteRouter.get("/get/:book_id", requireAuth, async (req, res) => {
     const bookId = Number(req.params.book_id);
     const userId = res.locals.userId as number;
     try{
-        const [rows] = await pool.query<RowDataPacket[]>(
+        let [rows] = await pool.query<RowDataPacket[]>(
             'SELECT * FROM user_activity WHERE book_id = ? AND user_id = ?',
             [bookId, userId]
         );
@@ -24,7 +24,6 @@ noteRouter.get("/get/:book_id", requireAuth, async (req, res) => {
             );
         }
         res.json(rows);
-        return rows[0];
     }
     catch (error) {
         console.error(error);

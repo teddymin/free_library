@@ -13,6 +13,9 @@ function ReadPage() {
   const book = BOOKS.find((b) => b.id === Number(id));
   const note = useNote(Number(id));
   const {loggedIn, setLoggedIn} = useAuth();
+  if(loggedIn === null) {
+    return <div>로그인 상태 확인 중...</div>;
+  }
   if(loggedIn === false) {
     return <LoginComponent onLoggedIn ={() => setLoggedIn(true)} />;
   }
