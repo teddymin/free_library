@@ -1,7 +1,7 @@
 import { useSearchParams} from "react-router-dom";
 import SiteHeader from "../components/site_header";
 import BookCard from "../components/book_card";
-import {BOOKS} from "../data/books";
+import useBook from "../data/books";
 import {CATEGORIES} from "../data/category";
 import "./main_page.css";
 import LoginComponent from "../components/google_login"
@@ -14,6 +14,7 @@ function MainPage() {
   const q = (params.get("q") ?? "").trim();
   const keyword = q.toLowerCase();
   const {loggedIn, setLoggedIn} = useAuth();
+  const BOOKS = useBook(0);
   const activities = useActivity(loggedIn === true); // 로그인 상태에 따라 활동 내역을 가져옴
   const myBookIds = new Set(activities.map((a) => a.book_id)); // 활동 내역에서 책 ID만 추출하여 Set으로 만듦
   const filtered = BOOKS.filter((book) => { //my 분류하는 곳

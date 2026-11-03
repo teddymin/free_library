@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import type { Book } from "../types/book";
 
 // 화면 확인용 샘플 데이터입니다. 서버(API)가 준비되면 fetch 결과로 교체하세요.
-export const BOOKS: Book[] = [
+/*export const BOOKS: Book[] = [
   {
     id: 1,
     title: "운수 좋은 날",
@@ -103,9 +104,19 @@ export const BOOKS: Book[] = [
     cover: "/covers/cover-10.jpg",
   },
 ];
+*/
 
+const useBook = (book_id: number) => {
+  const [books, setBooks] = useState<Book[]>([]);
 
+  useEffect(() => {
+    fetch(`http://localhost:4000/api/book/${book_id}`, { credentials: "include" })
+        .then((res) => (res.ok ? res.json():[]))
+        .then((data) => setBooks(data)) // 받은 데이터를 상태에 저장 → 화면이 다시 그려짐
+        .catch((err) => console.error(err));
+  }, []);
+  const BOOKS: Book[] = books;
+  return BOOKS;
+};
 
-export function findBook(id: number): Book | undefined {
-  return BOOKS.find((book) => book.id === id);
-}
+export default useBook;
