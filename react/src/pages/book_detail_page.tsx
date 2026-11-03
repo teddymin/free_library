@@ -9,7 +9,6 @@ function BookDetailPage() {
     redirect("/");
   }
   const book = useBook(Number(id))[0]; // useBook은 배열을 반환하므로 첫 번째 요소를 가져옴
-  const book_category = book.categories.split(",");
   if (!book) {
     return (
       <div>
@@ -23,6 +22,7 @@ function BookDetailPage() {
       </div>
     );
   }
+  const book_category = book.categories.split(",");
 
   return (
     <div>

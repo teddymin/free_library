@@ -1,28 +1,35 @@
-main{
-    width: 100vw;
-    height: 100vh;
-    display:flex; 
-    flex-direction: column;
-}
 h2{
     font-size: 18px;
     font-weight: 600;
 }
+pre{
+    white-space: pre-wrap; 
+    word-break: break-all;
+}
+.read-page-container{
+    height: 100%;       
+    display: flex;
+    flex-direction: column;
+}
+.read-page-container .site-header{
+    flex-shrink: 0;
+}
 .context{
-    display : flex;
-    width: 100%;
-    flex: 1;
+    flex: 1;                   /* 헤더를 뺀 나머지 */
+    min-height: 0;
+    display: flex;
 }
 .read-page{
     background-color: white;
     width: 80%;
-    height: 100%;
     padding: 20px;
+    min-height: 0;      
+    display: flex;        
+    flex-direction: column;
 }
 .note-page{
     background-color: var(--green-50);
     width: 20%;
-    height: 100%;
     padding: 20px;
 }
 .book-title-container{
@@ -34,4 +41,22 @@ h2{
 }
 .book-author{
     margin-top: auto;
+}
+.book-content{
+    min-height: 0;          
+    margin-top: 20px;
+    overflow-y: auto;
+}
+.book-content-text{
+    line-height: 1.6;
+    font-family: 'Pretendard Variable', Pretendard
+}
+.note-input{
+    width: 100%;
+    height: 90%;
+    resize: none;
+    border: none;
+    background-color: var(--green-50);
+    outline: none;
+    font-family: 'Pretendard Variable', Pretendard
 }

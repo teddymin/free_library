@@ -8,26 +8,26 @@ function ReadPage() {
   const { id } = useParams();
   const BOOKS = useBook(0);
   const book = BOOKS.find((b) => b.id === Number(id));
-
   return (
-    <main>
+    <div className= "read-page-container">
       <SiteHeader />
-      <div className="context">
+      <main className="context">
         <div className="read-page">
           <div className="book-title-container">
             <h1 className="book-title">{book?.title}</h1>
-            <h2 className="book-author">{book?.author}</h2>
+            <h2 className="book-author">&lt;{book?.author}&gt;</h2>
           </div>
           <div className="book-content">
-            <p>{book?.content}</p>
+            <pre className= "book-content-text">{book?.content}</pre>
           </div>
         </div>
         <div className="note-page">
           <h1>Note</h1>
-          <textarea placeholder="이곳에 메모를 입력하세요..." ></textarea>
+          <br></br>
+          <textarea className = "note-input" placeholder="이곳에 메모를 입력하세요..." ></textarea>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 

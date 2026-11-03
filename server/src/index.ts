@@ -21,7 +21,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/activity', user_book_list_router);
-app.use('/api/books', bookRouter);
+app.use('/api/book', bookRouter);
 
 app.listen(PORT, () => {
   console.log(`서버 실행 중: http://localhost:${PORT}`);
