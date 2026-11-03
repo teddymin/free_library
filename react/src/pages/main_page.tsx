@@ -21,11 +21,13 @@ function MainPage() {
     if(category === "MY") {
       return myBookIds.has(book.id);
     }
-    const matchCategory = !category || book.categories.includes(category);
+    const book_categories = book.categories.split(","); // 문자열을 배열로 변환
+    const matchCategory = !category || book_categories.includes(category);
     const matchKeyword =
       !keyword ||
       book.title.toLowerCase().includes(keyword) ||
       book.author.toLowerCase().includes(keyword);
+    return true;
     return matchCategory && matchKeyword;
   });
 

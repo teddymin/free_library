@@ -1,12 +1,15 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, redirect, useParams } from "react-router-dom";
 import SiteHeader from "../components/site_header";
-import { findBook } from "../data/books";
+import useBook from "../data/books";
 import "./book_detail_page.css";
 
 function BookDetailPage() {
   const { id } = useParams();
-  const book = findBook(Number(id));
-
+  if (id === '0' || !id) {
+    redirect("/");
+  }
+  const book = useBook(Number(id))[0]; // useBook은 배열을 반환하므로 첫 번째 요소를 가져옴
+  const book_category = book.categories.split(",");
   if (!book) {
     return (
       <div>
@@ -43,7 +46,7 @@ function BookDetailPage() {
             <h1 className="detail-title">{book.title}</h1>
 
             <ul className="chips" aria-label="분류">
-              {book.categories.map((name) => (
+              {book_category.map((name) => (
                 <li key={name}>
                   <Link to={`/?category=${encodeURIComponent(name)}`} className="chip">
                     {name}
