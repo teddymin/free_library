@@ -60,3 +60,12 @@ pre{
     outline: none;
     font-family: 'Pretendard Variable', Pretendard
 }
+.save-button{
+    width: 100%;
+    height: 40px;
+    background-color: var(--green-200);
+    border: none;
+    color: var(--green-600);
+    font-weight: 600;
+    cursor: pointer;
+}

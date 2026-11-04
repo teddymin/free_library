@@ -5,6 +5,7 @@ import {useNote, updateNote} from "../data/note";
 import "./read_page.css";
 import LoginComponent from "../components/google_login";
 import { useAuth } from "../components/use_auth";
+import { useEffect, useState } from "react";
 
 
 function ReadPage() {
@@ -13,11 +14,21 @@ function ReadPage() {
   const book = BOOKS.find((b) => b.id === Number(id));
   const note = useNote(Number(id));
   const {loggedIn, setLoggedIn} = useAuth();
+  const [text, setText] = useState("");
+  useEffect(() => {
+    setText(note[0]?.note ?? "");
+  }, [note]);
+
   if(loggedIn === null) {
     return <div>로그인 상태 확인 중...</div>;
   }
   if(loggedIn === false) {
-    return <LoginComponent onLoggedIn ={() => setLoggedIn(true)} />;
+    return (  
+      <>
+        <SiteHeader />
+        <LoginComponent onLoggedIn ={() => setLoggedIn(true)} />
+      </>
+    );
   }
   return (  
 
@@ -36,8 +47,8 @@ function ReadPage() {
         <div className="note-page">
           <h1>Note</h1>
           <br></br>
-          <textarea className = "note-input" placeholder="이곳에 메모를 입력하세요..." >{ note[0].note  === null || note[0].note.length === 0 ? "" : note[0].note }</textarea>
-          <button className="save-button" onClick={() =>updateNote(Number(id), (document.querySelector(".note-input") as HTMLTextAreaElement).value)}>
+          <textarea className = "note-input" placeholder="이곳에 메모를 입력하세요..." onChange={(e) => setText(e.target.value)} value={text} ></textarea>
+          <button className="save-button" onClick={() =>updateNote(Number(id), text)}>
             저장
           </button>
         </div>

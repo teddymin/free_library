@@ -27,7 +27,6 @@ function MainPage() {
       !keyword ||
       book.title.toLowerCase().includes(keyword) ||
       book.author.toLowerCase().includes(keyword);
-    return true;
     return matchCategory && matchKeyword;
   });
 

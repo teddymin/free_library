@@ -18,7 +18,7 @@ noteRouter.get("/get/:book_id", requireAuth, async (req, res) => {
                 'INSERT INTO user_activity (user_id, book_id, note) VALUES (?, ?, ?)',
                 [userId, bookId, '']
             );        
-            const [rows] = await pool.query<RowDataPacket[]>(
+            [rows] = await pool.query<RowDataPacket[]>(
                 'SELECT * FROM user_activity WHERE book_id = ? AND user_id = ?',
                 [bookId, userId]
             );
