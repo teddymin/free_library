@@ -44,7 +44,7 @@ function SiteHeader() {
   return (
     <header className="site-header">
       <div className="container site-header-inner">
-        <Link to="/" className="logo" aria-label="Free Library 홈">
+        <Link to="/" className="logo" aria-label="홈">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
               d="M12 6.5C10.2 5.2 7.6 4.6 4 4.8v13c3.6-.2 6.2.4 8 1.7 1.8-1.3 4.4-1.9 8-1.7v-13c-3.6-.2-6.2.4-8 1.7z"
@@ -52,7 +52,7 @@ function SiteHeader() {
             />
             <path d="M12 6.5v13" stroke="#fff" strokeWidth="1.4" />
           </svg>
-          <span>free_library</span> {/*project 이상*/}
+          <span>Free Library</span> 
         </Link>
 
         {/* q가 바뀌면 입력창도 새로 초기화되도록 key 사용 */}
